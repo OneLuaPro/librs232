@@ -619,8 +619,8 @@ rs232_write_ovl_impl(struct rs232_port_t *p, const unsigned char *buf, unsigned 
 	if (buf_len != *write_len)
 		DBG("WriteFile() %s\n", last_error());
 
-	DBG("write_len=%d hex='%s' ascii='%s'\n", *write_len, rs232_hex_dump(buf, w),
-	    rs232_ascii_dump(buf, w));
+	DBG("write_len=%d hex='%s' ascii='%s'\n", *write_len, rs232_hex_dump(buf, *write_len),
+	    rs232_ascii_dump(buf, *write_len));
 
 	return RS232_ERR_NOERROR;
 }
@@ -668,7 +668,7 @@ rs232_read(struct rs232_port_t *p, unsigned char *buf, unsigned int buf_len,
 	ret = rs232_read_impl(p, buf, buf_len, read_len);
 #endif
 
-	DBG("read_len=%d hex='%s' ascii='%s'\n", r, rs232_hex_dump(buf, *read_len),
+	DBG("read_len=%d hex='%s' ascii='%s'\n", *read_len, rs232_hex_dump(buf, *read_len),
 		rs232_ascii_dump(buf, *read_len));
 
 	return ret;
@@ -694,7 +694,7 @@ rs232_read_timeout_forced(struct rs232_port_t *p, unsigned char *buf,
 	ret = rs232_read_timeout_forced_impl(p, buf, buf_len, read_len, timeout);
 #endif
 
-	DBG("read_len=%d hex='%s' ascii='%s'\n", r, rs232_hex_dump(buf, *read_len),
+	DBG("read_len=%d hex='%s' ascii='%s'\n", *read_len, rs232_hex_dump(buf, *read_len),
 		rs232_ascii_dump(buf, *read_len));
 
 	return ret;
@@ -718,7 +718,7 @@ rs232_read_timeout(struct rs232_port_t *p, unsigned char *buf,
 	ret = rs232_read_timeout_impl(p, buf, buf_len, read_len, timeout);
 #endif
 
-	DBG("read_len=%d hex='%s' ascii='%s'\n", r, rs232_hex_dump(buf, *read_len),
+	DBG("read_len=%d hex='%s' ascii='%s'\n", *read_len, rs232_hex_dump(buf, *read_len),
 		rs232_ascii_dump(buf, *read_len));
 
 	return ret;
@@ -741,7 +741,7 @@ rs232_write(struct rs232_port_t *p, const unsigned char *buf, unsigned int buf_l
 	ret = rs232_write_impl(p, buf, buf_len, write_len);
 #endif
 
-	DBG("write_len=%d hex='%s' ascii='%s'\n", w, rs232_hex_dump(buf, *write_len),
+	DBG("write_len=%d hex='%s' ascii='%s'\n", *write_len, rs232_hex_dump(buf, *write_len),
 	    rs232_ascii_dump(buf, *write_len));
 
 	return ret;
@@ -765,7 +765,7 @@ rs232_write_timeout(struct rs232_port_t *p, const unsigned char *buf,
 	ret = rs232_write_timeout_impl(p, buf, buf_len, write_len, timeout);
 #endif
 
-	DBG("write_len=%d hex='%s' ascii='%s'\n", w, rs232_hex_dump(buf, *write_len),
+	DBG("write_len=%d hex='%s' ascii='%s'\n", *write_len, rs232_hex_dump(buf, *write_len),
 	    rs232_ascii_dump(buf, *write_len));
 
 	return ret;
@@ -1214,7 +1214,7 @@ rs232_fd(struct rs232_port_t *p)
 {
 	struct rs232_windows_t *wx = p->pt;
 
-	DBG("p=%p p->pt=%p wx->fd=%d\n", (void *)p, p->pt, wx->fd);
+	DBG("p=%p p->pt=%p wx->fd=%d\n", (void *)p, p->pt, (int)wx->fd);
 
 	return (unsigned int) wx->fd;
 }

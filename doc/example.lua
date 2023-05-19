@@ -1,4 +1,4 @@
-rs232 = require("luars232")
+rs232 = require("rs232")
 
 -- Linux
 -- port_name = "/dev/ttyS0"

@@ -41,3 +41,5 @@ libtool
 *~
 *.un~
 *.swp
+build
+
