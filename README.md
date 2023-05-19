@@ -37,6 +37,8 @@ p:close()
 
 Original librs232 `README.md` ends here.
 
+------
+
 ## Building and Installing librs232
 
 ### Prerequisites
