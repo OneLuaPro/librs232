@@ -70,28 +70,20 @@ cmake --install . --config Release
 
 Replace `<arch>` with your desired architecture. Available architectures with selected `Visual Studio 17 2022` generator are `Win32`, `x64`, `ARM` and `ARM64`. A librs232 example file is available in `<lua_install_dir>/share/doc/librs232` after install.
 
-## Fetch changes form original librs232 repository
+## Sync this fork with original librs232 repository
 
-These are the command to incorporate code base changes form original librs232 repository.
+Open Git Bash and execute `./SyncFork.sh`.
 
-1. Add original and remote repository to local clone. This step is only required once.
-
-```cmd
-C:\misc\librs232>git remote add librs232 https://github.com/srdgame/librs232.git
-C:\misc\librs232>git remote -v
-librs232        https://github.com/srdgame/librs232.git (fetch)
-librs232        https://github.com/srdgame/librs232.git (push)
-origin  git@github.com:KritzelKratzel/librs232.git (fetch)
-origin  git@github.com:KritzelKratzel/librs232.git (push)
-C:\misc\librs232>
+```bash
+John Doe@DESKTOP-1HK25HF MINGW64 /c/misc/librs232 (master)
+$ ./SyncFork.sh
+Original remote repo found.
+Already on 'master'
+Your branch is up to date with 'origin/master'.
+From github.com:KritzelKratzel/librs232
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+Already up to date.
+Everything up-to-date
+John Doe@DESKTOP-1HK25HF MINGW64 /c/misc/librs232 (master)
 ```
-
-2. Command sequence for fetching changes on original repository:
-
-```cmd
-git checkout master
-git pull origin master
-git merge librs232/master
-git push origin master
-```
-
