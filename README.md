@@ -1,19 +1,30 @@
 # librs232 with CMake Support
 
-## Multiplatform library for serial communications over RS-232 (serial port)
+librs232 is a multiplatform library for serial communications over RS-232 using Lua.
 
-[![Build Status](https://travis-ci.org/srdgame/librs232.svg?branch=master)](https://travis-ci.org/srdgame/librs232)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/srdgame/librs232?branch=master&svg=true)](https://ci.appveyor.com/project/srdgame/librs232)
+## History
 
-## Changes from the original version
-* Windows. Use overlapped IO model.
-* Windows. Support detect break/parity error.
-* Windows. Implement `rs232_in_queue_clear`.
-* Windows. Fix using static variables to support multithreading.
-* Windows. `rs232_read` wait at least one byte (like in POSIX version).
-* Basic tests on Travis/Appveyor.
-* Lua. Export `rs232_in_queue_clear` / `rs232_in_queue` functions.
-* Lua. Add more Lua way module.
+- **Original development** until 2018, repository now in archive mode: https://github.com/ynezz/librs232
+
+- **Improvements for Windows** and further development until 2021: https://github.com/srdgame/librs232
+
+  * Windows. Use overlapped IO model.
+
+  * Windows. Support detect break/parity error.
+
+  * Windows. Implement `rs232_in_queue_clear`.
+
+  * Windows. Fix using static variables to support multithreading.
+
+  * Windows. `rs232_read` wait at least one byte (like in POSIX version).
+
+  * Basic tests on Travis/Appveyor.
+
+  * Lua. Export `rs232_in_queue_clear` / `rs232_in_queue` functions.
+
+  * Lua. Add more Lua way module.
+
+- **This repository**: Same as srdgame's repository, but with CMake build intrastructure on top with focus on Windows builds.
 
 ## Lua binding
 
@@ -34,10 +45,6 @@ print(p:write('AT\r\n'))
 print(p:read(64, 5000))
 p:close()
 ```
-
-Original librs232 `README.md` ends here.
-
-------
 
 ## Building and Installing librs232
 
@@ -70,7 +77,7 @@ cmake --install . --config Release
 
 Replace `<arch>` with your desired architecture. Available architectures with selected `Visual Studio 17 2022` generator are `Win32`, `x64`, `ARM` and `ARM64`. A librs232 example file is available in `<lua_install_dir>/share/doc/librs232` after install.
 
-## Sync this fork with original librs232 repository
+## Sync this fork with srdgame's librs232 repository
 
 Open Git Bash and execute `./SyncFork.sh`.
 
