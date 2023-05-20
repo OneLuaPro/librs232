@@ -106,6 +106,7 @@ Over the years librs232 has seen a larger [number of forks](https://github.com/y
 - `src/rs232_windows.c` :
   - Force Unicode version of CreateFile() as of https://github.com/srdgame/librs232/compare/master...1linux:librs232:master
   - `int` vs. `long` as of https://github.com/srdgame/librs232/compare/master...jjonethal:librs232:master
+- Implement function `win32GetAnyComport()` as of https://github.com/srdgame/librs232/compare/master...jjonethal:librs232:master
 - `luaL_reg` vs. `luaL_Reg` in `bindings/lua/luars232.c` as of https://github.com/srdgame/librs232/compare/master...jjonethal:librs232:master
 - Convert the representation of ports from light userdata to full userdata objects to be compatible with LuaJIT as of https://github.com/srdgame/librs232/compare/master...vitex:librs232:master
 - Misc stuff as of https://github.com/srdgame/librs232/compare/master...RangelReale:librs232:master
