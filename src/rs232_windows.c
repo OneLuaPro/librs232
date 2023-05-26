@@ -1216,5 +1216,5 @@ rs232_fd(struct rs232_port_t *p)
 
 	DBG("p=%p p->pt=%p wx->fd=%d\n", (void *)p, p->pt, (int)wx->fd);
 
-	return (unsigned int) wx->fd;
+	return (unsigned long long) wx->fd;
 }
