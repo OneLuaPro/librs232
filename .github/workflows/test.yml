@@ -1,0 +1,55 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        luaVersion: ["5.1", "5.2", "5.3", "luajit"]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: leafo/gh-actions-lua@v8.0.0
+      with:
+        luaVersion: ${{ matrix.luaVersion }}
+
+    - uses: leafo/gh-actions-luarocks@v4.0.0
+
+    - name: setup
+      run: |
+        luarocks make
+        sudo apt install -y libuv1-dev socat
+        luarocks show lluv        > /dev/null 2>&1 || luarocks install lluv
+        luarocks show lzmq-timer  > /dev/null 2>&1 || luarocks install lzmq-timer
+        luarocks show lunitx      > /dev/null 2>&1 || luarocks install lunitx
+
+    - name: test
+      run: |
+        cd ./bindings/lua/test
+        lua -lrs232 -v
+        # lua test_socat.lua
+        socat -d -d PTY,link=/tmp/pts_1 PTY,link=/tmp/pts_2 &
+        socat -d -d PTY,link=/tmp/pts_3 PTY,link=/tmp/pts_4 &
+        sleep 5
+        ############################################
+        lua testsrv.lua /tmp/pts_1 /tmp/pts_3 > ./testsrv.log &
+        sleep 5
+        lua utestcli.lua /tmp/pts_2 /tmp/pts_4
+        tail -100 ./testsrv.log
+        kill -9 $(pidof lua) || echo 'ignore'
+        sleep 5
+        ############################################
+        lua testsrv_rs232.lua /tmp/pts_1 /tmp/pts_3 > ./testsrv.log &
+        sleep 5
+        lua utestcli_rs232.lua /tmp/pts_2 /tmp/pts_4
+        tail -100 ./testsrv.log
+        kill -9 $(pidof lua) || echo 'ignore'
+        sleep 5
+        ############################################
+        lua test_gc.lua /tmp/pts_1
+
