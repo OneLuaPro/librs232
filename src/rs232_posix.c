@@ -115,7 +115,12 @@ rs232_in_queue(struct rs232_port_t *p, unsigned int *in_bytes)
 	tv.tv_usec = 1;
 	tv.tv_sec = 0;
 
-	select(ux->fd+1, &set, NULL, NULL, &tv);
+	ret = select(ux->fd+1, &set, NULL, NULL, &tv);
+	if (ret < 0 || ret > 1) {
+		DBG("%s\n", "RS232_ERR_SELECT");
+		return RS232_ERR_SELECT;
+	}
+
 	ret = ioctl(ux->fd, FIONREAD, &b);
 	if (ret == -1) {
 		*in_bytes = 0;
@@ -159,7 +164,7 @@ rs232_in_queue_clear(struct rs232_port_t *p)
 
 		ret = select(ux->fd+1, &set, NULL, NULL, &tv);
 		DBG("select=%d\n", ret);
-		if (ret <= 0) {
+		if (ret <= 0 || ret > 1) {
 			free(buf);
 			return;
 		}
@@ -244,7 +249,7 @@ rs232_read_timeout_forced(struct rs232_port_t *p, unsigned char *buf,
 			break;
 		}
 
-		if (ret == -1) {
+		if (ret < 0 || ret > 1) {
 			DBG("%s\n", "select error");
 			break;
 		}
