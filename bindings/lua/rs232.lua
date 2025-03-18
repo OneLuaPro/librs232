@@ -416,7 +416,7 @@ end
 
 return setmetatable({
   _NAME      = "rs232";
-  _VERSION   = "0.1.1-dev";
+  _VERSION   = "1.0.3";
   _COPYRIGHT = "Copyright (C) 2015-2016 Alexey Melnichuk";
   _LICENSE   = "MIT";
 
