@@ -123,4 +123,5 @@ add_subdirectory(src)
 
 # ------------------------------------------------------------------------------
 # Install docs
+install(FILES librs232.html DESTINATION ${INSTALL_DOCDIR})
 install(DIRECTORY doc/ DESTINATION ${INSTALL_DOCDIR})	# "/" omits leading dir
