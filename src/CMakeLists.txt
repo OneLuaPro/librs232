@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2023 Kritzel Kratzel.
+# Copyright (c) 2023-2026 The OneLuaPro project authors.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in 
@@ -34,13 +34,13 @@ target_include_directories(rs232 PRIVATE
 if(WIN32 AND NOT MinGW)
   target_sources(rs232 PRIVATE
     rs232_windows.c ${RS232_INCLUDE_DIR}/${PROJECT_NAME}/rs232_windows.h)  
-  target_compile_options(rs232 PRIVATE
-    /D_USRDLL /D_CRT_SECURE_NO_WARNINGS /DRS232_EXPORT)
+  target_compile_definitions(rs232 PRIVATE
+    _USRDLL _CRT_SECURE_NO_WARNINGS RS232_EXPORT)
   if(LIBRS232_DEBUG_MODE)
-    target_compile_options(rs232 PRIVATE /DRS232_DEBUG)
+    target_compile_definitions(rs232 PRIVATE RS232_DEBUG)
   endif()
-  target_link_options(rs232 PRIVATE
-    /LIBPATH:${LIBLUA_LIBDIR} liblua.lib ws2_32.lib)
+  target_link_directories(rs232 PRIVATE ${LIBLUA_LIBDIR})
+  target_link_libraries(rs232 PRIVATE liblua.lib ws2_32.lib)
 else()
   message(FATAL_ERROR "Not yet fully implemented.")
   target_sources(rs232 PRIVATE
@@ -58,7 +58,7 @@ install(
   RUNTIME DESTINATION ${INSTALL_LIBRS232_CDIR}
 )
 
-# ------------------------------------------------------------------------------
+#< ------------------------------------------------------------------------------
 # install lua files to defined locations
 install(
   FILES ${RS232_BINDING_DIR}/rs232.lua
