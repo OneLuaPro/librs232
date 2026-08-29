@@ -1213,6 +1213,34 @@ rs232_close(struct rs232_port_t *p)
 }
 
 RS232_LIB unsigned int
+rs232_sendbrk(struct rs232_port_t *p)
+{
+	struct rs232_windows_t *wx = p->pt;
+
+	DBG("p=%p p->pt=%p\n", (void *)p, p->pt);
+
+	if (!rs232_port_open(p))
+		return RS232_ERR_PORT_CLOSED;
+
+	/* Start the break condition */
+	if (!SetCommBreak(wx->fd)) {
+		DBG("SetCommBreak() %s\n", last_error());
+		return RS232_ERR_IOCTL;
+	}
+
+	/* Wait 250ms to match the default POSIX break duration */
+	Sleep(250);
+
+	/* Clear the break condition to resume normal operation */
+	if (!ClearCommBreak(wx->fd)) {
+		DBG("ClearCommBreak() %s\n", last_error());
+		return RS232_ERR_IOCTL;
+	}
+
+	return RS232_ERR_NOERROR;
+}
+
+RS232_LIB unsigned int
 rs232_fd(struct rs232_port_t *p)
 {
 	struct rs232_windows_t *wx = p->pt;

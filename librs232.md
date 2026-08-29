@@ -24,6 +24,7 @@ These methods manage data transmission, buffer states, and the connection lifecy
 | `port:flush()`          | none                           | `error_code`              | Clears both hardware and software I/O buffers.               |
 | `port:in_queue()`       | none                           | `err`, `count`            | Returns the number of bytes waiting in the input buffer.     |
 | `port:in_queue_clear()` | none                           | `error_code`              | Clears only the input (receive) buffer.                      |
+| `port:sendbrk()`        | none                           | `error_code`              | Sends a break-signal with 250ms duration.                    |
 | `port:device()`         | none                           | `path` (string)           | Returns the device path (e.g., `"/dev/ttyUSB0"` or `"COM1"`). |
 | `port:fd()`             | none                           | `handle` (int)            | Returns the underlying system file descriptor.               |
 | `port:close()`          | none                           | `error_code`              | Closes the port and releases system resources.               |
