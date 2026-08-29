@@ -26,6 +26,8 @@
 
 #include "librs232/qrs232.h"
 
+#if !defined(BUILD_MONOLITHIC)
+
 QRS232::QRS232()
 {
 	m_open = false;
@@ -80,3 +82,5 @@ void QRS232::close()
 	m_open = false;
 	m_port = NULL;
 }
+
+#endif

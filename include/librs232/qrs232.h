@@ -24,8 +24,9 @@
  *
  */
 
-#include <QString>
+#if !defined(BUILD_MONOLITHIC)
 
+#include <QString>
 
 extern "C" {
 	#include "librs232/rs232.h"
@@ -47,3 +48,5 @@ private:
 	bool m_open;
 	struct rs232_port_t *m_port;
 };
+
+#endif

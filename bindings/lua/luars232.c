@@ -23,6 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#if !defined(BUILD_MONOLITHIC)
+
 #include <lauxlib.h>
 #include <lua.h>
 
@@ -59,6 +61,7 @@ static struct {
 	{ "RS232_BAUD_38400", RS232_BAUD_38400 },
 	{ "RS232_BAUD_57600", RS232_BAUD_57600 },
 	{ "RS232_BAUD_115200", RS232_BAUD_115200 },
+	{ "RS232_BAUD_230400", RS232_BAUD_230400 },
 	{ "RS232_BAUD_460800", RS232_BAUD_460800 },
 	{ "RS232_BAUD_921600", RS232_BAUD_921600 },
 	/* databits */
@@ -580,3 +583,5 @@ RS232_LIB int luaopen_rs232_core(lua_State *L);
 RS232_LIB int luaopen_rs232_core(lua_State *L){
 	return luaopen_luars232(L);
 }
+
+#endif

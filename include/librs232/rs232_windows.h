@@ -53,6 +53,10 @@
 #define CBR_1800 1800
 #endif
 
+#ifndef CBR_230400
+#define CBR_230400 230400
+#endif
+
 #ifndef CBR_460800
 #define CBR_460800 460800
 #endif

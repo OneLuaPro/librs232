@@ -90,7 +90,11 @@ unsigned int rs232_simple_test(void)
 	return 0;
 }
 
-int main()
+#if defined(BUILD_MONOLITHIC)
+#define main			rs232_test_main
+#endif
+
+int main(void)
 {
 	return rs232_simple_test();
 }

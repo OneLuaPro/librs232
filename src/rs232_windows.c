@@ -931,6 +931,9 @@ rs232_set_baud(struct rs232_port_t *p, enum rs232_baud_e baud)
 	case RS232_BAUD_115200:
 		pdcb.BaudRate = CBR_115200;
 		break;
+	case RS232_BAUD_230400:
+		pdcb.BaudRate = CBR_230400;
+		break;
 	case RS232_BAUD_460800:
 		pdcb.BaudRate = CBR_460800;
 		break;
