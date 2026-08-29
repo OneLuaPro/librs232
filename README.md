@@ -24,7 +24,7 @@ librs232 is a multiplatform library for serial communications over RS-232 using 
 
   * Lua. Add more Lua way module.
 
-- **This repository**: Same as srdgame's repository, but with CMake build intrastructure on top with focus on Windows builds.
+- **This repository**: Same as srdgame's repository, but with CMake build infrastructure on top with focus on Windows builds.
 
 ## Lua binding
 
@@ -99,11 +99,8 @@ John Doe@DESKTOP-1HK25HF MINGW64 /c/misc/librs232 (master)
 
 Over the years librs232 has seen a larger [number of forks](https://github.com/ynezz/librs232/network/members) of which only a few where merged back into ynezz's or srdgame's repository. The following list suggests changes to be implemented into this repository. All list items were collected during a manual [compare-across-forks analysis](https://github.com/srdgame/librs232/compare/master...srdgame:librs232:master). Some of them might address the same type of improvement, but from a different perspective.
 
-- Add baud rate 230400 as of https://github.com/srdgame/librs232/compare/master...GerHobbelt:librs232:master
-- Posix: Implement send break using tcsendbreak() as of https://github.com/srdgame/librs232/compare/master...urutva:librs232:master
+- **Implemented:** Add baud rate 230400 as of https://github.com/srdgame/librs232/compare/master...GerHobbelt:librs232:master
+- **Implemented:** Posix: Implement send break using tcsendbreak() as of https://github.com/srdgame/librs232/compare/master...urutva:librs232:master
 - **Implemented:** posix: add missing free in rs232_init as of https://github.com/srdgame/librs232/compare/master...speakinghedge:librs232:master
-- Implement function `win32GetAnyComport()` as of https://github.com/srdgame/librs232/compare/master...jjonethal:librs232:master
 - **Implemented:**`luaL_reg` vs. `luaL_Reg` in `bindings/lua/luars232.c` as of https://github.com/srdgame/librs232/compare/master...jjonethal:librs232:master
-- Convert the representation of ports from light userdata to full userdata objects to be compatible with LuaJIT as of https://github.com/srdgame/librs232/compare/master...vitex:librs232:master
-- Misc stuff as of https://github.com/srdgame/librs232/compare/master...RangelReale:librs232:master
 
