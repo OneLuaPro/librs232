@@ -332,6 +332,20 @@ static int lua_port_close(lua_State *L)
 	return 1;
 }
 
+/* error = port:sendbrk() */
+static int lua_port_sendbrk(lua_State *L)
+{
+	struct rs232_port_t *p = *(struct rs232_port_t**) luaL_checkudata(L, 1, MODULE_NAMESPACE);
+
+	if (p == NULL || !rs232_port_open(p)) {
+		lua_pushinteger(L, RS232_ERR_PORT_CLOSED);
+		return 1;
+	}
+
+	lua_pushinteger(L, rs232_sendbrk(p));
+	return 1;
+}
+
 /* __gc */
 static int lua_port_gc(lua_State *L)
 {
@@ -477,6 +491,7 @@ static luaL_Reg port_methods[] = {
 	{ "fd", lua_port_fd },
 	{ "in_queue", lua_port_in_queue },
 	{ "in_queue_clear", lua_port_in_queue_clear },
+	{ "sendbrk", lua_port_sendbrk},
 	/* baud */
 	{ "baud_rate", lua_port_get_baud },
 	{ "baud_rate_tostring", lua_port_get_strbaud },

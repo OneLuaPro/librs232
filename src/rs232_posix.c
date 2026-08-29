@@ -855,6 +855,24 @@ rs232_close(struct rs232_port_t *p)
 }
 
 unsigned int
+rs232_sendbrk(struct rs232_port_t *p)
+{
+	int ret;
+	struct rs232_posix_t *ux = p->pt;
+
+	DBG("p=%p p->pt=%p\n", (void *)p, p->pt);
+
+	if (!rs232_port_open(p))
+		return RS232_ERR_PORT_CLOSED;
+
+	ret = tcsendbreak(ux->fd, 0);
+	if (ret == -1)
+		return RS232_ERR_IOCTL;
+
+	return RS232_ERR_NOERROR;
+}
+
+unsigned int
 rs232_fd(struct rs232_port_t *p)
 {
 	struct rs232_posix_t *ux = (struct rs232_posix_t *)p->pt;

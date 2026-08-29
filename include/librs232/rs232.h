@@ -198,6 +198,7 @@ RS232_LIB void rs232_end(struct rs232_port_t *p);
 RS232_LIB unsigned int rs232_open(struct rs232_port_t *p);
 RS232_LIB unsigned int rs232_port_open(struct rs232_port_t *p);
 RS232_LIB unsigned int rs232_close(struct rs232_port_t *p);
+RS232_LIB unsigned int rs232_sendbrk(struct rs232_port_t *p);
 RS232_LIB unsigned int rs232_flush(struct rs232_port_t *p);
 RS232_LIB void rs232_set_device(struct rs232_port_t *p, const char *device);
 RS232_LIB unsigned int rs232_set_baud(struct rs232_port_t *p, enum rs232_baud_e baud);
